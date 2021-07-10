@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="todo.css">
+
+  </head>
+<body class="bg">
+  <h2 id="header">My To Do List</h2>
+  <input type="text" id="myinput" placeholder="Enter here!!">
+  <span onclick="newElement()" class="btn">Add</span>
+  <ul id="mylist"></ul>
+
+<script>
+
+  var list = document.querySelector('ul');
+  list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+});
+
+function newElement() {
+  var li = document.createElement("li");
+  var input= document.getElementById("myinput").value;
+  var t = document.createTextNode(input);
+  li.appendChild(t);
+  if (input === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("mylist").appendChild(li);
+  }
+  document.getElementById("myinput").value = "";
+  li.classList.add('todo');
+ 
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+  var i;
+  var close = document.getElementsByClassName("close");
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+</body>
+</html>
